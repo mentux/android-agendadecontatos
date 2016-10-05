@@ -11,25 +11,25 @@ import net.tormen.agendadecontatos.model.Contato;
 public class TelaCadastroUsuario {
 
     MainActivity act;
-    EditText ednome, edendereco, edtelefone;
-    Button btcadastrar, btcancelar_cadastro;
-    TelaPrincipal tela_principal;
+    EditText edtNome, edtEndereco, edtTelefone;
+    Button btnCadastrar, btnCancelarCadastro;
+    TelaPrincipal telaPrincipal;
 
     public TelaCadastroUsuario(MainActivity act, TelaPrincipal
-            tela_principal) {
+            telaPrincipal) {
         this.act = act;
-        this.tela_principal = tela_principal;
+        this.telaPrincipal = telaPrincipal;
     }
 
     public void CarregarTela() {
         act.setContentView(R.layout.cadastro_de_usuario);
-        ednome = (EditText) act.findViewById(R.id.ednome);
-        edtelefone = (EditText) act.findViewById(R.id.edtelefone);
-        edendereco = (EditText) act.findViewById(R.id.edendereco);
-        btcadastrar = (Button) act.findViewById(R.id.btcadastrar);
-        btcancelar_cadastro = (Button)
+        edtNome = (EditText) act.findViewById(R.id.ednome);
+        edtTelefone = (EditText) act.findViewById(R.id.edtelefone);
+        edtEndereco = (EditText) act.findViewById(R.id.edendereco);
+        btnCadastrar = (Button) act.findViewById(R.id.btcadastrar);
+        btnCancelarCadastro = (Button)
                 act.findViewById(R.id.btcancelar_cadastro);
-        btcadastrar.setOnClickListener(new View.OnClickListener() {
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dialogo = new
@@ -43,21 +43,21 @@ public class TelaCadastroUsuario {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
                                 String nome =
-                                        ednome.getText().toString();
+                                        edtNome.getText().toString();
                                 String telefone =
-                                        edtelefone.getText().toString();
+                                        edtTelefone.getText().toString();
                                 String endereco =
-                                        edendereco.getText().toString();
+                                        edtEndereco.getText().toString();
                                 act.getContatos().add(new
                                         Contato(nome, telefone, endereco));
                                 act.ExibirMensagem("Cadastro efetuado com sucesso.");
-                                tela_principal.CarregarTela();
+                                telaPrincipal.CarregarTela();
                             }
                         });
                 dialogo.show();
             }
         });
-        btcancelar_cadastro.setOnClickListener(new
+        btnCancelarCadastro.setOnClickListener(new
                                                        View.OnClickListener() {
                                                            @Override
                                                            public void onClick(View view) {
@@ -71,7 +71,7 @@ public class TelaCadastroUsuario {
                                                                            @Override
                                                                            public void onClick(DialogInterface dialog,
                                                                                                int which) {
-                                                                               tela_principal.CarregarTela();
+                                                                               telaPrincipal.CarregarTela();
                                                                            }
                                                                        });
                                                                dialogo.show();

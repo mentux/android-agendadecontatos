@@ -8,15 +8,15 @@ import android.widget.TextView;
 
 public class TelaListagemUsuarios {
     MainActivity act;
-    TelaPrincipal tela_principal;
+    TelaPrincipal telaPrincipal;
     Button btanterior, btproximo, btfechar;
     TextView txtnome, txttelefone, txtendereco, txtstatus;
     int index;
 
     public TelaListagemUsuarios(MainActivity act, TelaPrincipal
-            tela_principal) {
+            telaPrincipal) {
         this.act = act;
-        this.tela_principal = tela_principal;
+        this.telaPrincipal = telaPrincipal;
         index = 0;
     }
 
@@ -63,7 +63,7 @@ public class TelaListagemUsuarios {
         btfechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tela_principal.CarregarTela();
+                telaPrincipal.CarregarTela();
             }
         });
     }
