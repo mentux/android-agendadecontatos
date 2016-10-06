@@ -44,25 +44,25 @@ public class TelaListagemUsuariosListView{
     }
 
 
-    public void removeAtomPayOnClickHandler(View v) {
+    /*public void removeAtomPayOnClickHandler(View v) {
         Contato itemToRemove = (Contato)v.getTag();
         adapter.remove(itemToRemove);
-    }
+    }*/
 
     private void setupListViewAdapter() {
-        ListView atomPaysListView = (ListView)act.findViewById(R.id.EnterPays_atomPaysList);
         adapter = new MinhaListViewAdapter(act, R.layout.listagem_usuarios_listview,
                 act.getContatos());
+        ListView atomPaysListView = (ListView)act.findViewById(R.id.lstViewListagemContatos);
         atomPaysListView.setAdapter(adapter);
     }
 
     private void setupAddPaymentButton() {
-        act.findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(new View.OnClickListener() {
+        /*act.findViewById(R.id.EnterPays_addAtomPayment).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 adapter.insert(new Contato("", "",""), 0);
             }
-        });
+        });*/
     }
 }

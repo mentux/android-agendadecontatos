@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.tormen.agendadecontatos.R;
@@ -21,39 +23,45 @@ import java.util.List;
  * Created by tormen on 04/10/16.
  */
 
-public class MinhaListViewAdapter extends ArrayAdapter<Contato> {
+public class MinhaListViewAdapter extends BaseAdapter {
     private List<Contato> items;
     private int layoutResourceId;
     private Context context;
+    private LayoutInflater mInflater;
 
     public MinhaListViewAdapter(Context context, int layoutResourceId, List<Contato> items) {
-        super(context, layoutResourceId, items);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.items = items;
+        mInflater = LayoutInflater.from(context);
     }
 
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        ContatoHolder holder = null;
+    public View getView(int position, View view, ViewGroup parent) {
+        ContatoHolder itemHolder = null;
+        if (view == null) {
+            view = mInflater.inflate(layoutResourceId, null);
 
-        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        row = inflater.inflate(layoutResourceId, parent, false);
+            //cria um item de suporte para não precisarmos sempre
+            //inflar as mesmas informacoes
+            itemHolder = new ContatoHolder();
+            itemHolder.nome = ((EditText) view.findViewById(R.id.atomPay_name));
+            itemHolder.btnDeleteContato = ((ImageButton) view.findViewById(R.id.btListViewRemove));
 
-        holder = new ContatoHolder();
-        holder.contato = items.get(position);
-        holder.btnDeleteContato = (ImageButton)row.findViewById(R.id.listViewRemove);
-        holder.btnDeleteContato.setTag(holder.contato);
+            //define os itens na view;
+            view.setTag(itemHolder);
+        }else{
+            //se a view já existe pega os itens.
+            itemHolder = (ContatoHolder) view.getTag();
+        }
 
-        //holder.nome = (EditText)row.findViewById(R.id.edtNome);
-        //holder.telefone = (TextView)row.findViewById(R.id.atomPay_value);
-        //holder.endereco = (TextView)row.findViewById(R.id.atomPay_value);
-
-        row.setTag(holder);
-
-        setupItem(holder);
-        return row;
+        //pega os dados da lista
+        //e define os valores nos itens.
+        Contato item = items.get(position);
+        itemHolder.nome.setText(item.getNome());
+        //itemHolder.imgIcon.setImageResource(item.getIconeRid());
+        return view;
     }
 
     private void setupItem(ContatoHolder holder) {
@@ -79,10 +87,12 @@ public class MinhaListViewAdapter extends ArrayAdapter<Contato> {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
@@ -91,19 +101,35 @@ public class MinhaListViewAdapter extends ArrayAdapter<Contato> {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try{
+                try {
                     holder.contato.setTelefone(s.toString());
-                            //Double.parseDouble(s.toString()));
-                }catch (NumberFormatException e) {
+                    //Double.parseDouble(s.toString()));
+                } catch (NumberFormatException e) {
                     //Log.e(LOG_TAG, "error reading double value: " + s.toString());
                 }
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
+    }
+    @Override
+    public int getCount() {
+        return items.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return items.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
     }
 }
