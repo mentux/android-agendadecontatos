@@ -1,9 +1,12 @@
 package net.tormen.agendadecontatos;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import net.tormen.agendadecontatos.adapter.MinhaListViewAdapter;
 import net.tormen.agendadecontatos.model.Contato;
@@ -19,18 +22,25 @@ public class TelaListagemUsuariosListView{
     private TelaPrincipal tela_principal;
     private MinhaListViewAdapter adapter;
 
-    protected void onCreate(MainActivity act, TelaPrincipal
+    public TelaListagemUsuariosListView(MainActivity act, TelaPrincipal
             tela_principal) {
         this.act = act;
         this.tela_principal = tela_principal;
-
-        setupListViewAdapter();
-
-        setupAddPaymentButton();
     }
 
     public void CarregarTela() {
-        act.setContentView(R.layout.cadastro_de_usuario);
+        //Antes de carregar a tela, verifica se existe registros inseridos
+        if (act.getContatos().size() == 0) {
+            (new AlertDialog.Builder(act))
+                    .setTitle("Aviso")
+                    .setMessage("Não existe nenhum registro cadastrado.")
+                    .setNeutralButton("OK", null)
+                    .show();
+            return;
+        }
+        act.setContentView(R.layout.listagem_usuarios_listview);
+        setupListViewAdapter();
+        setupAddPaymentButton();
     }
 
 
@@ -40,9 +50,9 @@ public class TelaListagemUsuariosListView{
     }
 
     private void setupListViewAdapter() {
-        adapter = new MinhaListViewAdapter(act, R.layout.listagem_usuarios_listview,
-                new ArrayList<Contato>());
         ListView atomPaysListView = (ListView)act.findViewById(R.id.EnterPays_atomPaysList);
+        adapter = new MinhaListViewAdapter(act, R.layout.listagem_usuarios_listview,
+                act.getContatos());
         atomPaysListView.setAdapter(adapter);
     }
 

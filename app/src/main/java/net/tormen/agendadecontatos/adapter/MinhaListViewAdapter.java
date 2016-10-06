@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -42,12 +43,12 @@ public class MinhaListViewAdapter extends ArrayAdapter<Contato> {
 
         holder = new ContatoHolder();
         holder.contato = items.get(position);
-        holder.btnDeleteContato = (ImageButton)row.findViewById(R.id.atomPay_removePay);
+        holder.btnDeleteContato = (ImageButton)row.findViewById(R.id.listViewRemove);
         holder.btnDeleteContato.setTag(holder.contato);
 
-        holder.nome = (TextView)row.findViewById(R.id.atomPay_name);
-        holder.telefone = (TextView)row.findViewById(R.id.atomPay_value);
-        holder.endereco = (TextView)row.findViewById(R.id.atomPay_value);
+        //holder.nome = (EditText)row.findViewById(R.id.edtNome);
+        //holder.telefone = (TextView)row.findViewById(R.id.atomPay_value);
+        //holder.endereco = (TextView)row.findViewById(R.id.atomPay_value);
 
         row.setTag(holder);
 
@@ -57,13 +58,13 @@ public class MinhaListViewAdapter extends ArrayAdapter<Contato> {
 
     private void setupItem(ContatoHolder holder) {
         holder.nome.setText(holder.contato.getNome());
-        holder.telefone.setText(String.valueOf(holder.contato.getTelefone()));
-        holder.endereco.setText(String.valueOf(holder.contato.getTelefone()));
+        //holder.telefone.setText(String.valueOf(holder.contato.getTelefone()));
+        //holder.endereco.setText(String.valueOf(holder.contato.getTelefone()));
     }
 
     public static class ContatoHolder {
         Contato contato;
-        TextView nome;
+        EditText nome;
         TextView telefone;
         TextView endereco;
         ImageButton btnDeleteContato;

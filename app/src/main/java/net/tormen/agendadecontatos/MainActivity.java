@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         telaPrincipal = new TelaPrincipal(this);
         telaCadastro = new TelaCadastroUsuario(this, telaPrincipal);
         telaListagem = new TelaListagemUsuarios(this, telaPrincipal);
+        telaListagemListView = new TelaListagemUsuariosListView(this, telaPrincipal);
         telaPrincipal.setTelaCadastro(telaCadastro);
         telaPrincipal.setTelaListagem(telaListagem);
         telaPrincipal.setTelaListagemListView(telaListagemListView);
