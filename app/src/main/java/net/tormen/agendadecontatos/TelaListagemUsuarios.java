@@ -9,8 +9,8 @@ import android.widget.TextView;
 public class TelaListagemUsuarios {
     MainActivity act;
     TelaPrincipal telaPrincipal;
-    Button btanterior, btproximo, btfechar;
-    TextView txtnome, txttelefone, txtendereco, txtstatus;
+    Button btnAnterior, btnProximo, btnFechar;
+    TextView txtNome, txtTelefone, txtEndereco, txtStatus;
     int index;
 
     public TelaListagemUsuarios(MainActivity act, TelaPrincipal
@@ -31,16 +31,16 @@ public class TelaListagemUsuarios {
             return;
         }
         act.setContentView(R.layout.listagem_usuarios_cadastrados);
-        btanterior = (Button) act.findViewById(R.id.btanterior);
-        btproximo = (Button) act.findViewById(R.id.btproximo);
-        btfechar = (Button) act.findViewById(R.id.btfechar);
-        txtnome = (TextView) act.findViewById(R.id.txtnome);
-        txtendereco = (TextView) act.findViewById(R.id.txtendereco);
-        txttelefone = (TextView) act.findViewById(R.id.txttelefone);
-        txtstatus = (TextView) act.findViewById(R.id.txtstatus);
+        btnAnterior = (Button) act.findViewById(R.id.btanterior);
+        btnProximo = (Button) act.findViewById(R.id.btproximo);
+        btnFechar = (Button) act.findViewById(R.id.btfechar);
+        txtNome = (TextView) act.findViewById(R.id.txtnome);
+        txtEndereco = (TextView) act.findViewById(R.id.txtendereco);
+        txtTelefone = (TextView) act.findViewById(R.id.txttelefone);
+        txtStatus = (TextView) act.findViewById(R.id.txtstatus);
         PreencheCampos(index);
         AtualizaStatus(index);
-        btanterior.setOnClickListener(new View.OnClickListener() {
+        btnAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (index > 0) {
@@ -50,7 +50,7 @@ public class TelaListagemUsuarios {
                 }
             }
         });
-        btproximo.setOnClickListener(new View.OnClickListener() {
+        btnProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (index < act.getContatos().size() - 1) {
@@ -60,7 +60,7 @@ public class TelaListagemUsuarios {
                 }
             }
         });
-        btfechar.setOnClickListener(new View.OnClickListener() {
+        btnFechar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 telaPrincipal.CarregarTela();
@@ -69,13 +69,13 @@ public class TelaListagemUsuarios {
     }
 
     private void PreencheCampos(int idx) {
-        txtnome.setText(act.getContatos().get(idx).getNome());
-        txttelefone.setText(act.getContatos().get(idx).getTelefone());
-        txtendereco.setText(act.getContatos().get(idx).getEndereco());
+        txtNome.setText(act.getContatos().get(idx).getNome());
+        txtTelefone.setText(act.getContatos().get(idx).getTelefone());
+        txtEndereco.setText(act.getContatos().get(idx).getEndereco());
     }
 
     private void AtualizaStatus(int idx) {
         int total = act.getContatos().size();
-        txtstatus.setText("Registros : " + (idx + 1) + "/" + total);
+        txtStatus.setText("Registros: " + (idx + 1) + "/" + total);
     }
 }
